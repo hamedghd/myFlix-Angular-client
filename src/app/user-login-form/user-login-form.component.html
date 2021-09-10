@@ -5,11 +5,20 @@
   <mat-card-content>
     <form>
       <mat-form-field>
-        <input matInput [(ngModel)]="userData.Username" placeholder="Username" type="text" name="Username" required>
+        <input matInput [(ngModel)]="userData.Username" placeholder="Username" type="text" name="Username"
+          pattern="[a-zA-Z0-9]+" minlength="5" required>
+        <mat-error>
+          An alphanumeric username with a minimum of 5 characters is required!
+        </mat-error>
       </mat-form-field>
+      <br>
+      <br>
       <mat-form-field>
         <input matInput [(ngModel)]="userData.Password" type="password" placeholder="Password" name="Password" required>
       </mat-form-field>
+      <mat-error>
+        Password is required!
+      </mat-error>
     </form>
   </mat-card-content>
   <mat-card-actions>
