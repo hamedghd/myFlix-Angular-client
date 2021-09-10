@@ -7,7 +7,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 
 // This import is used to display notifications back to the user
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
+import { style } from '@angular/animations';
+import { getCurrencySymbol } from '@angular/common';
 
 @Component({
   selector: 'app-user-login-form',
@@ -36,13 +38,16 @@ export class UserLoginFormComponent implements OnInit {
       localStorage.setItem('user', response.user.Username);
       localStorage.setItem('token', response.token);
       this.snackBar.open('user logged in successfully!', 'OK', {
-        duration: 2000
+        duration: 2000,
+        panelClass: ['success-snackbar'],
       });
     }, (response) => {
-      this.snackBar.open(response, 'OK', {
-        duration: 2000
+      this.snackBar.open(response, 'Error', {
+        duration: 2000,
+        panelClass: ['fail-snackbar'],
       });
     });
   }
+
 
 }
