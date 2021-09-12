@@ -1,0 +1,38 @@
+.container {
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: baseline;
+  gap: 50px 50px;
+  margin: 100px;
+  background-color: #be9b7b;
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  align-items: center ;
+  text-align: center;
+  background-color: #4b3832;
+  color: #fff4e6;
+  width:300px;
+  height: 500px;
+}
+
+.image {
+  width:200px;
+  height: 300px;
+}
+
+.title {
+  height:70px;
+  margin-top: 20px;
+}
+
+.subtitle {
+  color: #fff4e6;
+}
+
+.actions {
+  color: #fff4e6;
+}
