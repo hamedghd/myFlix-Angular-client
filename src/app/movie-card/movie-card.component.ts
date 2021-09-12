@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
+import { MovieDirectorComponent } from '../movie-director/movie-director.component';
 
 @Component({
   selector: 'app-movie-card',
@@ -40,6 +41,13 @@ export class MovieCardComponent {
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(MovieGenreComponent, {
       data: { name, description, },
+      width: '50%'
+    })
+  }
+
+  openDirectorDialog(name: string, bio: string, birth: Date, death: Date): void {
+    this.dialog.open(MovieDirectorComponent, {
+      data: { name, bio, birth, death },
       width: '50%'
     })
   }

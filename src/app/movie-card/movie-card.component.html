@@ -9,7 +9,8 @@
       <button mat-button class="button" (click)="openGenreDialog(movie.Genre.Name, movie.Genre.Description)">
         Genre
       </button>
-      <button mat-button>
+      <button mat-button
+        (click)="openDirectorDialog(movie.Director.Name, movie.Director.Bio, movie.Director.Birth, movie.Director.Death)">
         Director
       </button>
       <button mat-button (click)="openSynopsisDialog(movie.Title, movie.ImagePath, movie.Description)">
