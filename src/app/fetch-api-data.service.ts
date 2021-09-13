@@ -121,15 +121,16 @@ export class FetchApiDataService {
     const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     console.log(apiUrl + `users/${username}/movies/${movieId}`);
-    return this.http.post(apiUrl + `users/${username}/movies/${movieId}`, {
-      headers: new HttpHeaders(
-        {
-          Authorization: 'Bearer ' + token,
-        })
-    }).pipe(
-      map(this.extractResponseData),
-      catchError(this.handleError)
-    );
+    return this.http.post(apiUrl + `users/${username}/movies/${movieId}`, {},
+      {
+        headers: new HttpHeaders(
+          {
+            Authorization: 'Bearer ' + token,
+          })
+      }).pipe(
+        map(this.extractResponseData),
+        catchError(this.handleError)
+      );
   }
 
   // Edit user
