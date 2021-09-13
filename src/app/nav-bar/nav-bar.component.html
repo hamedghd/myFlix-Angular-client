@@ -1,0 +1,19 @@
+<div class="navbar">
+  <div class="container">
+    <button mat-button class="button" routerLink="/movies">
+      myFlix
+    </button>
+
+    <div class="links">
+      <button class="button" mat-button routerLink="/movies">
+        Movies
+      </button>
+      <button class="button" mat-button routerLink="/profile">
+        Profile
+      </button>
+      <button class="button" mat-button (click)="logOutUser()">
+        Log Out
+      </button>
+    </div>
+  </div>
+</div>

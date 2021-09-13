@@ -1,3 +1,4 @@
+<app-nav-bar></app-nav-bar>
 <div class="container">
   <mat-card *ngFor="let movie of movies;" class="items">
     <mat-card-header>
@@ -16,7 +17,9 @@
       <button mat-button (click)="openSynopsisDialog(movie.Title, movie.ImagePath, movie.Description)">
         Synopsis
       </button>
-      <mat-icon>favorite_border</mat-icon>
+      <button mat-button (click)="addToFavorites(user.Username, movie._id)">
+        <mat-icon>favorite_border</mat-icon>
+      </button>
     </mat-card-actions>
   </mat-card>
 </div>
