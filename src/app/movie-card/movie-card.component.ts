@@ -5,6 +5,9 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
+import { ConditionalExpr } from '@angular/compiler';
+
+const username = localStorage.getItem('user');
 
 @Component({
   selector: 'app-movie-card',
@@ -13,6 +16,7 @@ import { MovieDirectorComponent } from '../movie-director/movie-director.compone
 })
 export class MovieCardComponent {
   movies: any[] = [];
+  user: any = {};
   constructor(
     public fetchApiData: FetchApiDataService,
     public dialog: MatDialog,
@@ -21,6 +25,7 @@ export class MovieCardComponent {
 
   ngOnInit(): void {
     this.getMovies();
+    this.getUser(username);
   }
 
   getMovies(): void {
@@ -31,6 +36,13 @@ export class MovieCardComponent {
     });
   }
 
+  getUser(username: any): void {
+    this.fetchApiData.getUser(username).subscribe((resp: any) => {
+      this.user = resp;
+      console.log(this.user);
+      return this.user;
+    })
+  }
   openSynopsisDialog(title: string, imageUrl: any, description: string): void {
     this.dialog.open(MovieSynopsisComponent, {
       data: { title, imageUrl, description, },
@@ -50,5 +62,22 @@ export class MovieCardComponent {
       data: { name, bio, birth, death },
       width: '50%'
     })
+  }
+
+  addToFavorites(username: string, movieId: any,) {
+    console.log(username);
+    console.log(movieId);
+    this.fetchApiData.addMovie(username, movieId).subscribe((resp: any) => {
+
+      console.log(resp);
+      this.snackBar.open(`The selected movie has been added to your favorites.`, 'OK', {
+        duration: 3000,
+      })
+      /*
+      setTimeout(function () {
+        window.location.reload()
+      }, 3000);
+      */
+    });
   }
 }
