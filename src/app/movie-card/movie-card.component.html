@@ -17,8 +17,12 @@
       <button mat-button (click)="openSynopsisDialog(movie.Title, movie.ImagePath, movie.Description)">
         Synopsis
       </button>
-      <button mat-button (click)="addToFavorites(user.Username, movie._id)">
+
+      <button *ngIf="!isFavorited(movie._id)" mat-button (click)="addToFavorites(movie._id)">
         <mat-icon>favorite_border</mat-icon>
+      </button>
+      <button *ngIf="isFavorited(movie._id)" mat-button (click)="removeFromFavorites(movie._id)">
+        <mat-icon>favorite</mat-icon>
       </button>
     </mat-card-actions>
   </mat-card>

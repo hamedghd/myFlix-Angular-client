@@ -5,7 +5,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MovieSynopsisComponent } from '../movie-synopsis/movie-synopsis.component';
 import { MovieGenreComponent } from '../movie-genre/movie-genre.component';
 import { MovieDirectorComponent } from '../movie-director/movie-director.component';
-import { ConditionalExpr } from '@angular/compiler';
 
 const username = localStorage.getItem('user');
 
@@ -16,6 +15,7 @@ const username = localStorage.getItem('user');
 })
 export class MovieCardComponent {
   movies: any[] = [];
+  favoriteMovies: any[] = [];
   user: any = {};
   constructor(
     public fetchApiData: FetchApiDataService,
@@ -26,6 +26,7 @@ export class MovieCardComponent {
   ngOnInit(): void {
     this.getMovies();
     this.getUser(username);
+    this.getUserFavorites();
   }
 
   getMovies(): void {
@@ -64,20 +65,51 @@ export class MovieCardComponent {
     })
   }
 
-  addToFavorites(username: string, movieId: any,) {
-    console.log(username);
+  addToFavorites(movieId: any,) {
     console.log(movieId);
-    this.fetchApiData.addMovie(username, movieId).subscribe((resp: any) => {
+    this.fetchApiData.addMovie(movieId).subscribe((resp: any) => {
 
       console.log(resp);
       this.snackBar.open(`The selected movie has been added to your favorites.`, 'OK', {
         duration: 3000,
       })
-      /*
       setTimeout(function () {
         window.location.reload()
       }, 3000);
-      */
+      this.getUserFavorites();
     });
+  }
+
+  removeFromFavorites(movieId: any,) {
+    console.log(movieId);
+    this.fetchApiData.deleteMovie(movieId).subscribe((resp: any) => {
+
+      console.log(resp);
+      this.snackBar.open(`The selected movie has been added to your favorites.`, 'OK', {
+        duration: 3000,
+      })
+
+      setTimeout(function () {
+        window.location.reload()
+      }, 3000);
+      this.getUserFavorites();
+    });
+  }
+
+  getUserFavorites(): void {
+    const user = localStorage.getItem('user');
+    this.fetchApiData.getUser(user).subscribe((resp: any) => {
+      this.favoriteMovies = resp.FavoriteMovies;
+      //console.log(this.faves);
+      return this.favoriteMovies;
+    });
+  }
+
+  isFavorited(id: any): any {
+    if (this.favoriteMovies.includes(id)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
