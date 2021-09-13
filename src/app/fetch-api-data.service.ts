@@ -4,6 +4,7 @@ import { catchError } from 'rxjs/internal/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 //Declaring the api url that will provide data for the client app
 const apiUrl = 'https://myflix-movieapi.herokuapp.com/';
@@ -13,7 +14,7 @@ const apiUrl = 'https://myflix-movieapi.herokuapp.com/';
 export class FetchApiDataService {
   // Inject the HttpClient module to the constructor params
   // This will provide HttpClient to the entire class, making it available via this.http
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
   }
   // Making the api call for the user registration endpoint
   public userRegistration(userDetails: any): Observable<any> {
@@ -116,9 +117,11 @@ export class FetchApiDataService {
 
 
   // Add a movie to favourite Movies
-  addMovie(user: any, movieid: any): Observable<any> {
+  addMovie(movieId: any): Observable<any> {
+    const username = localStorage.getItem('user');
     const token = localStorage.getItem('token');
-    return this.http.patch(apiUrl + `users/${user}/movies/${movieid}`, {
+    console.log(apiUrl + `users/${username}/movies/${movieId}`);
+    return this.http.post(apiUrl + `users/${username}/movies/${movieId}`, {
       headers: new HttpHeaders(
         {
           Authorization: 'Bearer ' + token,
@@ -146,7 +149,7 @@ export class FetchApiDataService {
 
 
   // Delete user 
-  deleteUser(/*user: any*/): Observable<any> {
+  deleteUser(): Observable<any> {
     let user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     return this.http.delete(apiUrl + `users/${user}`, {
@@ -161,7 +164,8 @@ export class FetchApiDataService {
 
 
   // Delete a movie from the favorite movies
-  deleteMovie(user: any, movieid: any): Observable<any> {
+  deleteMovie(movieid: any): Observable<any> {
+    let user = localStorage.getItem('user');
     const token = localStorage.getItem('token');
     return this.http.delete(apiUrl + `users/${user}/movies/${movieid}`, {
       headers: new HttpHeaders(
@@ -188,7 +192,7 @@ export class FetchApiDataService {
     } else {
       console.error(
         `Error Status code ${error.status}, ` +
-        `Error body is: ${error.error}`);
+        'Error body is:' + JSON.stringify(error.error));
     }
     return throwError(
       'Something bad happened; please try again later.');

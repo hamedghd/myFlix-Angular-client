@@ -1,25 +1,48 @@
 <app-nav-bar></app-nav-bar>
 <div class="container">
-  <mat-card class="user-info">
-    <mat-card-header>
-      <mat-card-title class="title">User information:</mat-card-title>
-    </mat-card-header>
-    <mat-card-content class="info">
-      <span>Username: </span> {{ user.Username }}
-      <br>
-      <span>Email: </span>{{ user.Email }}
-      <br>
-      <span>Birthday: </span>{{ user.Birth | date: "dd/MM/yyyy":"UTC" || "N/A" }}
-      <br>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button class="button-edit" (click)="openEditUserProfileDialog()">
-        Edit user info
-      </button>
+  <div class="div-profile">
+    <mat-card class="user-info">
+      <mat-card-header>
+        <mat-card-title class="title">User information:</mat-card-title>
+      </mat-card-header>
+      <mat-card-content class="info">
+        <span>Username: </span> {{ user.Username }}
+        <br>
+        <span>Email: </span>{{ user.Email }}
+        <br>
+        <span>Birthday: </span>{{ user.Birth | date: "dd/MM/yyyy":"UTC" || "N/A" }}
+        <br>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button class="button-edit" (click)="openEditUserProfileDialog()">
+          Edit user info
+        </button>
 
-      <button mat-raised-button class="button-delete" (click)="deleteAccount()">
-        Delete Account
-      </button>
-    </mat-card-actions>
-  </mat-card>
+        <button mat-raised-button class="button-delete" (click)="deleteAccount()">
+          Delete Account
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <!-- Display the list of favorite movies -->
+  <div class="favorites-title">
+    Favorite movies:
+  </div>
+  <div class="favorites-list">
+    <mat-card *ngFor="let movie of favoriteMovies;" class="favorites">
+      <mat-card-actions>
+        <mat-icon matTooltip="Remove movie from favorites" class="remove-icon" aria-label="Remove Movie from Favorite"
+          (click)="removeFavoriteMovie(movie._id, movie.Title)">
+          delete_outline
+        </mat-icon>
+      </mat-card-actions>
+      <mat-card-header>
+        <mat-card-title class="title">{{movie.Title}}</mat-card-title>
+        <mat-card-subtitle class="subtitle">Directed by: {{movie.Director.Name}}</mat-card-subtitle>
+      </mat-card-header>
+
+      <img class="image" src={{movie.ImagePath}} alt={{movie.Title}} />
+
+    </mat-card>
+  </div>
 </div>

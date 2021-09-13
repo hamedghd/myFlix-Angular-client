@@ -12,7 +12,8 @@ import { EditUserProfileComponent } from '../edit-user-profile/edit-user-profile
 })
 export class UserProfileComponent implements OnInit {
   user: any = {};
-
+  movies: any[] = [];
+  favoriteMovies: any[] = [];
   @Input() userData = { Username: '', Password: '', Email: '', Birthday: '' };
 
   constructor(
@@ -30,21 +31,45 @@ export class UserProfileComponent implements OnInit {
     let username = localStorage.getItem('user');
     this.fetchApiData.getUser(username).subscribe((res: any) => {
       this.user = res;
+      this.getFavoriteMovies();
       console.log(res);
     });
   }
-  deleteAccount(): void {
-    let username = localStorage.getItem('user');
-    this.fetchApiData.deleteUser(/*username*/).subscribe((res: string) => {
-      this.router.navigate(['/welcome']).then(() => {
-        window.location.reload();
+  getFavoriteMovies(): void {
+    this.fetchApiData.getAllMovies().subscribe((res: any) => {
+      this.movies = res;
+      this.movies.forEach((movie: any) => {
+        if (this.user.FavoriteMovies.includes(movie._id)) {
+          this.favoriteMovies.push(movie);
+        }
       });
-      console.log(res);
+    });
+    console.log(this.favoriteMovies);
+  }
+
+  removeFavoriteMovie(id: string, Title: string): void {
+    this.fetchApiData.deleteMovie(id).subscribe((resp) => {
+      console.log(resp);
+      this.snackBar.open(
+        `${Title} has been removed from your favorites!`,
+        'OK',
+        {
+          duration: 2000,
+        }
+      );
+      setTimeout(function () {
+        window.location.reload();
+      }, 1000);
+    });
+  }
+
+  deleteAccount(): void {
+    this.fetchApiData.deleteUser().subscribe(() => {
+      localStorage.clear();
+      this.router.navigate(['/welcome']);
       this.snackBar.open('You have deleted your account succesfully!', 'OK', {
         duration: 4000,
       });
-      localStorage.clear();
-
     });
   }
   openEditUserProfileDialog(): void {
