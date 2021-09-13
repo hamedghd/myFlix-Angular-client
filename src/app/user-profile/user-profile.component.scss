@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  justify-content: center;
+margin-top: 20px;;}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width:50%;
+  background-color: #4b3832;
+  color: #fff4e6;
+}
+
+.info {
+  font-size: 20px;
+  line-height: 40px;
+}
+
+.title {
+  font-size: 22px;
+  line-height: 50px;}
+
+span {
+  font-size: 22px;
+  margin-right: 10px;
+}
+
+.button-edit {
+  background-color: #be9b7b;
+  color: #fff4e6;
+}
+
+.button-delete {
+  background-color: #854442;
+  color: #fff4e6;
+}

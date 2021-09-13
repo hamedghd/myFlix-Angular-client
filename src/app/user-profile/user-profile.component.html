@@ -1,0 +1,25 @@
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <mat-card class="user-info">
+    <mat-card-header>
+      <mat-card-title class="title">User information:</mat-card-title>
+    </mat-card-header>
+    <mat-card-content class="info">
+      <span>Username: </span> {{ user.Username }}
+      <br>
+      <span>Email: </span>{{ user.Email }}
+      <br>
+      <span>Birthday: </span>{{ user.Birth | date: "dd/MM/yyyy":"UTC" || "N/A" }}
+      <br>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button class="button-edit" (click)="openEditUserProfileDialog()">
+        Edit user info
+      </button>
+
+      <button mat-raised-button class="button-delete" (click)="deleteAccount()">
+        Delete Account
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</div>
