@@ -1,0 +1,36 @@
+.empty {
+height: 20%;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  background-color: #4b3832;
+}
+
+.image {
+  width: 50%;
+  background-color: #4b3832;
+}
+.middle {
+  display: flex;
+  flex-direction: row;
+  max-width: 80%;
+  margin: auto;
+  
+}
+.title {
+  color: #fff4e6;
+}
+.button-signUp {
+  background-color: #be9b7b;
+  color: #fff4e6;
+}
+
+.button-login {
+  background-color: #854442;
+  color: #fff4e6;
+}
