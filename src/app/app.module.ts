@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
@@ -25,13 +25,17 @@ import { MovieGenreComponent } from './movie-genre/movie-genre.component';
 import { MovieDirectorComponent } from './movie-director/movie-director.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { EditUserProfileComponent } from './edit-user-profile/edit-user-profile.component';
+import { AuthGuardService } from './auth-guard.service';
 
+// Welcome page is accessible when the user is not logged in.
 const appRoutes: Routes = [
-  { path: 'welcome', component: WelcomePageComponent },
+  { path: 'welcome', component: WelcomePageComponent, canActivate: [AuthGuardService] },
   { path: 'movies', component: MovieCardComponent },
   { path: 'profile', component: UserProfileComponent },
   { path: '', redirectTo: 'welcome', pathMatch: 'prefix' },
 ];
+
+
 @NgModule({
   declarations: [
     AppComponent,
