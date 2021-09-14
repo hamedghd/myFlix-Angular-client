@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FetchApiDataService } from '../fetch-api-data.service';
-
+const username = localStorage.getItem('user');
 @Component({
   selector: 'app-edit-user-profile',
   templateUrl: './edit-user-profile.component.html',
@@ -10,7 +10,7 @@ import { FetchApiDataService } from '../fetch-api-data.service';
 })
 export class EditUserProfileComponent implements OnInit {
 
-  @Input() userData = { Username: '', Password: '', Email: '', Birth: '' };
+  @Input() userData = { Username: username, Password: '', Email: '', Birth: '' };
 
   constructor(
     public fetchUserData: FetchApiDataService,
