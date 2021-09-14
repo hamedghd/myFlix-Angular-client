@@ -57,6 +57,7 @@
   width:50%;
   background-color: #4b3832;
   color: #fff4e6;
+  text-align: center;
 }
 
 .info {
@@ -86,11 +87,13 @@ span {
 .button-edit {
   background-color: #be9b7b;
   color: #fff4e6;
+  margin: 10px;
 }
 
 .button-delete {
   background-color: #854442;
   color: #fff4e6;
+  margin: 10px;
 }
 
 
@@ -109,4 +112,11 @@ span {
 .image {
   width:150px;
   height: 200px;
+}
+
+@media (max-width: 500px) {
+  .user-info {
+    width:100%;
+    margin: 10px;
+  }
 }

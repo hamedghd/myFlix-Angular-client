@@ -17,3 +17,25 @@
   font-size: 24px;
 
 }
+
+@media (max-width: 500px) {
+  .container {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+  }
+  .button {
+    font-size: 20px;
+  
+  }
+}
+
+@media (max-width: 320px) {
+  
+  .button {
+    font-size: 16px;
+  
+  }
+}
+
