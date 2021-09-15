@@ -16,6 +16,7 @@ export class AuthGuardService implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
     if (localStorage.getItem('user')) {
+      this.router.navigate(['/movies']);
       return false;
     } else {
       return true;
