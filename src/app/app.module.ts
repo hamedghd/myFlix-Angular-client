@@ -65,7 +65,7 @@ const appRoutes: Routes = [
     MatSnackBarModule,
     MatIconModule
   ],
-  providers: [],
+  providers: [AuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

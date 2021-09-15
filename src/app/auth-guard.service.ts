@@ -12,14 +12,13 @@ import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from
 
 export class AuthGuardService implements CanActivate {
 
-  constructor() { }
-  canActivate() {
-    const username = localStorage.getItem('user');
+  constructor(private router: Router) { }
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-    if (username == '') {
-      return true;
-    } else {
+    if (localStorage.getItem('user')) {
       return false;
+    } else {
+      return true;
     }
   }
 }
