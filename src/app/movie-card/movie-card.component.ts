@@ -66,7 +66,7 @@ export class MovieCardComponent {
   openSynopsisDialog(title: string, imageUrl: any, description: string): void {
     this.dialog.open(MovieSynopsisComponent, {
       data: { title, imageUrl, description, },
-      width: '50%'
+      //width: '50%'
     })
   }
 
@@ -78,7 +78,7 @@ export class MovieCardComponent {
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(MovieGenreComponent, {
       data: { name, description, },
-      width: '50%'
+      //width: '50%',
     })
   }
 
@@ -92,7 +92,7 @@ export class MovieCardComponent {
   openDirectorDialog(name: string, bio: string, birth: Date, death: Date): void {
     this.dialog.open(MovieDirectorComponent, {
       data: { name, bio, birth, death },
-      width: '50%'
+      //width: '50%'
     })
   }
 

@@ -32,10 +32,39 @@
 }
 
 @media (max-width: 320px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
   
+  .links {
+    align-items: center;
+    justify-content: center;
+  }
   .button {
     font-size: 16px;
   
   }
 }
 
+@media (max-width: 250px) {
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-wrap: nowrap;
+    height: 200px;
+    min-width: 170px;
+  }
+  
+  .links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .button {
+    font-size: 16px;
+  
+  }
+}

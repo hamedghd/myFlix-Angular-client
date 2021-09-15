@@ -97,7 +97,7 @@ export class UserProfileComponent implements OnInit {
   openEditUserProfileDialog(): void {
     this.dialog.open(EditUserProfileComponent, {
       // Assigning the dialog a width
-      width: '50%'
+      //width: '50%'
     });
   }
 }
