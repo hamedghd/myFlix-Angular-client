@@ -7,9 +7,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { FetchApiDataService } from '../fetch-api-data.service';
 
 // This import is used to display notifications back to the user
-import { MatSnackBar, MatSnackBarConfig } from '@angular/material/snack-bar';
-import { style } from '@angular/animations';
-import { getCurrencySymbol } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
+
 
 @Component({
   selector: 'app-user-login-form',
@@ -17,7 +16,9 @@ import { getCurrencySymbol } from '@angular/common';
   styleUrls: ['./user-login-form.component.scss']
 })
 export class UserLoginFormComponent implements OnInit {
-
+  /**
+   * Required input fields for the login form
+   */
   @Input() userData = { Username: '', Password: '' };
 
   constructor(
@@ -29,10 +30,13 @@ export class UserLoginFormComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  // This is the function responsible for sending the form inputs to the backend
+
+  /**
+   * This is the function responsible for sending the form inputs to the backend
+   */
   loginUser(): void {
     this.fetchApiData.userLogin(this.userData).subscribe((response) => {
-      // Logic for a successful user registration goes here! (To be implemented)
+      // Logic for a successful user registration
       this.dialogRef.close(); // This will close the modal on success!
       console.log(response);
       // Add the current user and token to localStorage
@@ -42,6 +46,7 @@ export class UserLoginFormComponent implements OnInit {
         duration: 2000,
         panelClass: ['success-snackbar'],
       });
+      // Redirects to the /movies endpoint
       this.router.navigate(['movies']);
     }, (response) => {
       this.snackBar.open(response, 'Error', {

@@ -10,6 +10,9 @@ const username = localStorage.getItem('user');
 })
 export class EditUserProfileComponent implements OnInit {
 
+  /**
+   * Required input fields for updating the user information
+   */
   @Input() userData = { Username: username, Password: '', Email: '', Birth: '' };
 
   constructor(
@@ -21,6 +24,9 @@ export class EditUserProfileComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   * Edits the user information
+   */
   editUserInfo(): void {
     this.fetchUserData.editUser(this.userData).subscribe(
       (res) => {

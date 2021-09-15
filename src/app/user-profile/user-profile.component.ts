@@ -23,10 +23,16 @@ export class UserProfileComponent implements OnInit {
     public router: Router,
   ) { }
 
+  /**
+   * When opens the components, gets the user information
+   */
   ngOnInit(): void {
     this.getUser();
   }
 
+  /**
+   * Gets the user information from backend
+   */
   getUser(): void {
     let username = localStorage.getItem('user');
     this.fetchApiData.getUser(username).subscribe((res: any) => {
@@ -35,6 +41,10 @@ export class UserProfileComponent implements OnInit {
       console.log(res);
     });
   }
+
+  /**
+   * Gets the list of favorite movies from backend
+   */
   getFavoriteMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((res: any) => {
       this.movies = res;
@@ -47,6 +57,11 @@ export class UserProfileComponent implements OnInit {
     console.log(this.favoriteMovies);
   }
 
+  /**
+   * Removes a movie from the list of favorites
+   * @param id 
+   * @param Title 
+   */
   removeFavoriteMovie(id: string, Title: string): void {
     this.fetchApiData.deleteMovie(id).subscribe((resp) => {
       console.log(resp);
@@ -63,6 +78,9 @@ export class UserProfileComponent implements OnInit {
     });
   }
 
+  /**
+   * Delets the user account
+   */
   deleteAccount(): void {
     this.fetchApiData.deleteUser().subscribe(() => {
       localStorage.clear();
@@ -72,6 +90,10 @@ export class UserProfileComponent implements OnInit {
       });
     });
   }
+
+  /**
+   * Opens a dialog to edit the user information
+   */
   openEditUserProfileDialog(): void {
     this.dialog.open(EditUserProfileComponent, {
       // Assigning the dialog a width

@@ -23,12 +23,20 @@ export class MovieCardComponent {
     public snackBar: MatSnackBar,
   ) { }
 
+  /**
+   * When opens the component,
+   * gets the movies, user information,
+   * and the list of favorite movies
+   */
   ngOnInit(): void {
     this.getMovies();
     this.getUser(username);
     this.getUserFavorites();
   }
 
+  /**
+   * Gets the list of all movies
+   */
   getMovies(): void {
     this.fetchApiData.getAllMovies().subscribe((resp: any) => {
       this.movies = resp;
@@ -37,6 +45,10 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Gets the user information
+   * @param username 
+   */
   getUser(username: any): void {
     this.fetchApiData.getUser(username).subscribe((resp: any) => {
       this.user = resp;
@@ -44,6 +56,13 @@ export class MovieCardComponent {
       return this.user;
     })
   }
+
+  /**
+   * Opens the synopsis dialog
+   * @param title 
+   * @param imageUrl 
+   * @param description 
+   */
   openSynopsisDialog(title: string, imageUrl: any, description: string): void {
     this.dialog.open(MovieSynopsisComponent, {
       data: { title, imageUrl, description, },
@@ -51,6 +70,11 @@ export class MovieCardComponent {
     })
   }
 
+  /**
+   * Opens the genre dialog
+   * @param name 
+   * @param description 
+   */
   openGenreDialog(name: string, description: string): void {
     this.dialog.open(MovieGenreComponent, {
       data: { name, description, },
@@ -58,6 +82,13 @@ export class MovieCardComponent {
     })
   }
 
+  /**
+   * Opens the director dialog
+   * @param name 
+   * @param bio 
+   * @param birth 
+   * @param death 
+   */
   openDirectorDialog(name: string, bio: string, birth: Date, death: Date): void {
     this.dialog.open(MovieDirectorComponent, {
       data: { name, bio, birth, death },
@@ -65,6 +96,10 @@ export class MovieCardComponent {
     })
   }
 
+  /**
+   * Adds the movie with the assigned id to favorites
+   * @param movieId 
+   */
   addToFavorites(movieId: any,) {
     console.log(movieId);
     this.fetchApiData.addMovie(movieId).subscribe((resp: any) => {
@@ -80,6 +115,10 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Removes the movie with the assigned id from favorites
+   * @param movieId 
+   */
   removeFromFavorites(movieId: any,) {
     console.log(movieId);
     this.fetchApiData.deleteMovie(movieId).subscribe((resp: any) => {
@@ -96,6 +135,9 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Gets the list of user favorite movies
+   */
   getUserFavorites(): void {
     const user = localStorage.getItem('user');
     this.fetchApiData.getUser(user).subscribe((resp: any) => {
@@ -105,6 +147,12 @@ export class MovieCardComponent {
     });
   }
 
+  /**
+   * Checks wheather if the movie with the assigned id,
+   * is already added to the favorites or not.
+   * @param id 
+   * @returns 
+   */
   isFavorited(id: any): any {
     if (this.favoriteMovies.includes(id)) {
       return true;
