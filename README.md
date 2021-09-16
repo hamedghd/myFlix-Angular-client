@@ -1,5 +1,8 @@
 # MyFlixAngularClient
-
+<p align="center">
+  <img src="src/assets/myflix-angular-screen1.PNG" width="520">
+  </p>
+  
 ## Description
 This is a front-end side that is bult using Angular for a movie application call myFlix. This is based on an existing REST API which is named movie-API.
 
